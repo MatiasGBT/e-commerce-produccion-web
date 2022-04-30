@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta | Tienda Juegos</title>
+    <link rel="shortcut icon" href="imagenes/favicon.ico">
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!--CSS propios-->
+    <link href="estilos/styles.css" rel="stylesheet">
+    <link href="estilos/cuenta.css" rel="stylesheet">
+
+    <!--Google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans:wght@400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!--BARRA DE NAVEGACIÓN-->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img src="imagenes/logo.svg" width="50" height="50" class="d-inline-block align-text-center">
+                Tienda Juegos
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
+                <span class="fa-solid fa-bars-staggered"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fa-solid fa-home"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="carrito.html"><i class="fa-solid fa-shopping-cart"></i>
+                            Carrito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link activo" href="cuenta.html"><i class="fa-solid fa-user"></i> Cuenta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html"><i class="fa-solid fa-user-xmark"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--FIN DE BARRA DE NAVEGACIÓN-->
+
+    <main>
+        <div class="container">
+            <header>
+                <h1 class="mt-3 text-center text-md-start">HORIZON ZERO DAWN</h1>
+            </header>
+
+            <!--JUEGO-->
+            <section>
+                <h2>DETALLES DEL JUEGO</h2>
+                <form enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre del juego</label>
+                        <input type="text" class="d-block input_form" id="nombre" value="Horizon Zero Dawn"
+                            placeholder="Nuevo nombre del juego">
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Precio (USD)</label>
+                        <input type="number" class="d-block input_form" id="precio" value="40"
+                            placeholder="Nuevo precio">
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoria1" class="form-label">Categoría 1</label>
+                        <input type="text" class="d-block input_form" id="categoria1" value="Acción"
+                            placeholder="Nueva categoría para el juego">
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoria2" class="form-label">Categoría 2</label>
+                        <input type="text" class="d-block input_form" id="categoria2" value="Aventura"
+                            placeholder="Nueva categoría para el juego">
+                    </div>
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Imagen</label>
+                        <input type="file" accept=".jpg" class="d-block input_form" id="imagen">
+                        <p class="mt-1">Tamaño imagen recomendada: 1920x1080p (16:9)</p>
+                    </div>
+                    <button type="submit" class="btn boton-credenciales">Actualizar juego</button>
+                </form>
+            </section>
+            <!--FIN DE JUEGO-->
+
+        </div>
+    </main>
+
+    <!--FOOTER-->
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 mt-4 border-top">
+            <p class="col-md-4 mb-0 black">&copy; 2022 Tienda Juegos</p>
+
+            <a href="index.html"
+                class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <img src="imagenes/logo.png" height="50" width="50"></img>
+            </a>
+
+            <ul class="nav col-md-4 justify-content-end">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link px-2 black"><i class="fa-solid fa-home"></i> Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="carrito.html" class="nav-link px-2 black"><i class="fa-solid fa-shopping-cart"></i>
+                        Carrito</a>
+                </li>
+                <li class="nav-item">
+                    <a href="cuenta.html" class="nav-link px-2 black"><i class="fa-solid fa-user"></i> Cuenta</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link px-2 black"><i class="fa-solid fa-user-xmark"></i> Logout</a>
+                </li>
+            </ul>
+        </footer>
+    </div>
+    <!--FIN DE FOOTER-->
+
+    <script src="https://kit.fontawesome.com/94d22320fc.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+/* --- ESTILOS GLOBALES --- */
+
+/*BÁSICOS*/
+::selection {
+  background: red;
+  color: white;
+}
+
+header h1 {
+  font-size: 4.688rem;
+}
+
+h1,
+h2 {
+  font-family: "Bebas Neue", cursive;
+}
+
+label,
+p,
+a {
+  font-family: "Josefin Sans", sans-serif;
+}
+
+a {
+  color: red;
+}
+
+a:hover {
+  color: rgb(255, 51, 51);
+}
+
+/*ELEMENTOS DE FORMULARIOS*/
+.input_form {
+  border: 2px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.input_form:focus {
+  border: 2px solid red;
+  outline: none;
+}
+
+/*BARRA DE NAVEGACIÓN*/
+.navbar {
+  background: red !important;
+}
+
+.navbar-brand {
+  color: white !important;
+}
+
+.nav-link {
+  color: rgb(216, 216, 216) !important;
+}
+
+.activo {
+  color: white !important;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.navbar-toggler {
+  border: 2px solid white !important;
+}
+
+.navbar-toggler span {
+  color: white;
+}
+
+/*FOOTER*/
+.black {
+  color: black !important;
+}
