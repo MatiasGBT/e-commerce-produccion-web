@@ -1,15 +1,43 @@
-/* --- ESTILOS PÁGINA CUENTA --- */
+/* --- ESTILOS PÁGINA PANEL DE ADMINISTRADOR Y EDITAR JUEGO --- */
 
-.nav-cuenta {
+.nav-administrar {
     color: white !important;
 }
 
-input {
+.boton-crud {
+    display: block;
+    width: 45%;
+    padding: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.boton-editar {
+    background: gray;
+    color: white;
+}
+
+.boton-editar:hover {
+    background: rgb(190, 190, 190);
+    color: white;
+}
+
+.boton-eliminar {
+    background: red;
+    color: white;
+}
+
+.boton-eliminar:hover {
+    background: rgb(255, 72, 72);
+    color: white;
+}
+
+input, select {
     width: 100%;
 }
 
 @media (min-width: 768px) {
-    input {
+    input, select {
         width: 25%;
     }
 
