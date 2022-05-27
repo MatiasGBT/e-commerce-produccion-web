@@ -1,41 +1,105 @@
 /* --- ESTILOS PÁGINA INDEX --- */
 
 .nav-home {
-    color: white !important;
+  color: white !important;
 }
 
-h1, h2 {
-    font-size: 4.688rem;
+h1,
+h2 {
+  font-size: 4.688rem;
 }
 
 .carrusel-titulo {
-    font-size: 2.5rem;
-    margin-bottom: 0;
-    font-family: "Bebas Neue", cursive;
+  font-size: 2.5rem;
+  margin-bottom: 0;
+  font-family: "Bebas Neue", cursive;
 }
 
 .carrusel-texto {
-    font-size: 1.625rem;
-    margin-bottom: 0;
+  font-size: 1.625rem;
+  margin-bottom: 0;
 }
 
 .carousel-caption {
-    background: rgba(0, 0, 0, 0.527);
-    border-radius: 5px;
+  background: rgba(0, 0, 0, 0.527);
+  border-radius: 5px;
 }
 
-.carousel-control-prev-icon, .carousel-control-next-icon {
-    background: transparent;
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background: transparent;
+}
+
+.card-height {
+  height: 455px;
+}
+
+@media (min-width: 510px) {
+  .card-height {
+    height: 480px;
+  }
 }
 
 @media (min-width: 768px) {
-    .carousel-control-prev-icon, .carousel-control-next-icon {
-        background: rgba(0, 0, 0, 0.527);
-        display: block;
-        border-radius: 50%;
-        font-size: 1.625rem;
-        width: 50px;
-        height: 50px;
-    }
+  .card-height {
+    height: 410px;
+  }
 }
 
+@media (min-width: 992px) {
+  .card-height {
+    height: 400px;
+  }
+}
+
+.boton-ver-catalogo {
+  width: 100%;
+}
+
+.logo-plataforma {
+  bottom: 45.5%;
+  right: 3%;
+  border-radius: 25%;
+  box-shadow: 0px 0px 5px black;
+}
+
+@media (min-width: 768px) {
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background: rgba(0, 0, 0, 0.527);
+    display: block;
+    border-radius: 50%;
+    font-size: 1.625rem;
+    width: 50px;
+    height: 50px;
+  }
+
+  .boton-ver-catalogo {
+    width: 50%;
+  }
+
+  .logo-plataforma {
+    bottom: 56%;
+  }
+}
+
+@media (min-width: 992px) {
+  .boton-ver-catalogo {
+    width: 30%;
+  }
+
+  .logo-plataforma {
+    bottom: 52%;
+  }
+}
+
+.imagen-carrusel {
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .imagen-carrusel {
+    height: calc(100vh - 76px);
+  }
+}

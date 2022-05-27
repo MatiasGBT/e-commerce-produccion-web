@@ -28,10 +28,11 @@
 
                         <div class="col-6 col-lg-4 mb-3">
                             <div class="card carrito-card">
-                                <img src="../imagenes/juegos/Juego1.jpg" class="card-img-top">
+                                <img src="../imagenes/juegos/HorizonZeroDawn.jpg" class="card-img-top">
+                                <img src="../imagenes/plataformas/logo-play.png" width="35" heigth="35" class="position-absolute logo-plataforma">
                                 <div class="card-body">
                                     <h5 class="card-title">Horizon Zero Dawn</h5>
-                                    <p class="card-text">Precio: $40USD</p>
+                                    <p class="card-text">Precio: $19.99USD</p>
                                     <a href="#" class="btn d-block boton-catalogo">Quitar</a>
                                 </div>
                             </div>
@@ -39,10 +40,11 @@
 
                         <div class="col-6 col-lg-4 mb-3">
                             <div class="card carrito-card">
-                                <img src="../imagenes/juegos/Juego2.jpg" class="card-img-top">
+                                <img src="../imagenes/juegos/HorizonForbiddenWest.jpg" class="card-img-top">
+                                <img src="../imagenes/plataformas/logo-play.png" width="35" heigth="35" class="position-absolute logo-plataforma">
                                 <div class="card-body">
                                     <h5 class="card-title">Horizon Forbidden West</h5>
-                                    <p class="card-text">Precio: $60USD</p>
+                                    <p class="card-text">Precio: $69.99USD</p>
                                     <a href="#" class="btn d-block boton-catalogo">Quitar</a>
                                 </div>
                             </div>
@@ -50,10 +52,11 @@
 
                         <div class="col-6 col-lg-4 mb-3">
                             <div class="card carrito-card">
-                                <img src="../imagenes/juegos/Juego3.jpg" class="card-img-top">
+                                <img src="../imagenes/juegos/GodofWar.jpg" class="card-img-top">
+                                <img src="../imagenes/plataformas/logo-play.png" width="35" heigth="35" class="position-absolute logo-plataforma">
                                 <div class="card-body">
                                     <h5 class="card-title">God of War</h5>
-                                    <p class="card-text">Precio: $40USD</p>
+                                    <p class="card-text">Precio: $19.99USD</p>
                                     <a href="#" class="btn d-block boton-catalogo">Quitar</a>
                                 </div>
                             </div>
@@ -66,7 +69,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Horizon Zero Dawn + 2</h5>
-                            <p class="card-text">Precio total: $140USD</p>
+                            <p class="card-text">Precio total: $109.97USD</p>
                             <a href="#" class="btn d-block boton-catalogo">Comprar</a>
                         </div>
                     </div>

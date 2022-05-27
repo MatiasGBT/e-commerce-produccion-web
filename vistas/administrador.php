@@ -27,56 +27,36 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col" class="d-none d-md-table-cell">#</th>
                             <th scope="col">Titulo</th>
                             <th scope="col">Texto</th>
                             <th scope="col">Editar</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <?php if( count($juegos) > 0 ):?>
+                        <?php foreach($imagenesCarrusel as $carrusel): ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Horizon Forbidden West</td>
-                            <td>Las aventuras de Aloy continúan</td>
-                            <td>
-                                <div class="row">
-                                    <a href="editar.php" class="boton-crud boton-editar"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="eliminar.php" class="boton-crud boton-eliminar"><i
-                                            class="fa-solid fa-trash"></i></a>
+                            <td scope="row" class="py-0 d-none d-md-table-cell"><?php echo $carrusel->id_imagen?></td>
+                            <td class="py-0"><?php echo $carrusel->titulo?></td>
+                            <td class="py-0"><?php echo $carrusel->texto?></td>
+                            <td class="p-0">
+                                <div class="row m-0">
+                                    <a href="controlador-modificar-carrusel.php?id=<?php echo $carrusel->id_imagen?>" class="boton-crud boton-editar col-6">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a href="#" class="boton-crud boton-eliminar col-6" onclick="eliminarImagenCarrusel('controlador-eliminar-carrusel.php?id=<?php echo $carrusel->id_imagen?>')">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>God of War</td>
-                            <td>Vuelve el Dios de la Guerra</td>
-                            <td>
-                                <div class="row">
-                                    <a href="editar.php" class="boton-crud boton-editar"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="eliminar.php" class="boton-crud boton-eliminar"><i
-                                            class="fa-solid fa-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Horizon Zero Dawn</td>
-                            <td>Descubre el pasado de Aloy</td>
-                            <td>
-                                <div class="row">
-                                    <a href="editar.php" class="boton-crud boton-editar"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="eliminar.php" class="boton-crud boton-eliminar"><i
-                                            class="fa-solid fa-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
+                        <?php endforeach?>
+                    <?php endif?>
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-end">
-                    <a href="agregar.php" class="btn btn-success">Agregar</a>
+                    <a href="controlador-agregar-carrusel.php" class="btn btn-success">Agregar</a>
                 </div>
             </section>
             <!--FIN DE CARRUSEL-->
@@ -84,102 +64,81 @@
             <!--CATÁLOGO-->
             <section class="mt-3">
                 <h2>EDITAR CATÁLOGO DE JUEGOS</h2>
+                <form class="d-flex mb-3 col-12 col-lg-6" method="POST" action="controlador-administrador.php">
+                    <input class="d-block input_form me-2 w-100" type="search" placeholder="Buscar por nombre" name="nombre" id="nombre" minlength="3">
+                    <button class="btn d-block boton-catalogo" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col" class="d-none d-md-table-cell">#</th>
                             <th scope="col">Compra</th>
-                            <th scope="col">Precio</th>
+                            <th scope="col" class="d-none d-md-table-cell">Precio</th>
                             <th scope="col">Editar</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <?php if( count($juegos) > 0 ):?>
+                        <?php foreach($juegos as $juego): ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Horizon Zero Dawn</td>
-                            <td>$40USD</td>
-                            <td>
-                                <div class="row">
-                                    <a href="editar.php" class="boton-crud boton-editar"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="eliminar.php" class="boton-crud boton-eliminar"><i
-                                            class="fa-solid fa-trash"></i></a>
+                            <td scope="row" class="py-0 d-none d-md-table-cell"><?php echo $juego->id_juego?></td>
+                            <td class="py-0"><?php echo $juego->nombre_juego?></td>
+                            <td class="py-0 d-none d-md-table-cell">$<?php echo $juego->precio?>USD</td>
+                            <td class="p-0">
+                                <div class="row m-0">
+                                    <?php if($juego->destacado == 0):?>
+                                    <a href="#" class="boton-crud boton-destacar col-4" onclick="destacarJuego('controlador-destacar-juego.php?id=<?php echo $juego->id_juego?>')">
+                                        <i class="fa-solid fa-star"></i>
+                                    </a>
+                                    <?php else:?>
+                                    <a href="#" class="boton-crud boton-quitar-destacado col-4" onclick="quitarDestacadoJuego('controlador-quitar-destacado-juego.php?id=<?php echo $juego->id_juego?>')">
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                    </a>
+                                    <?php endif?>
+                                    <a href="controlador-modificar-juego.php?id=<?php echo $juego->id_juego?>" class="boton-crud boton-editar col-4">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a href="#" class="boton-crud boton-eliminar col-4" onclick="eliminarJuego('controlador-eliminar-juego.php?id=<?php echo $juego->id_juego?>')">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Horizon Forbidden West</td>
-                            <td>$60USD</td>
-                            <td>
-                                <div class="row">
-                                    <a href="editar.php" class="boton-crud boton-editar"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="eliminar.php" class="boton-crud boton-eliminar"><i
-                                            class="fa-solid fa-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>God of War</td>
-                            <td>$40USD</td>
-                            <td>
-                                <div class="row">
-                                    <a href="editar.php" class="boton-crud boton-editar"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="eliminar.php" class="boton-crud boton-eliminar"><i
-                                            class="fa-solid fa-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Juego 4</td>
-                            <td>$40USD</td>
-                            <td>
-                                <div class="row">
-                                    <a href="editar.php" class="boton-crud boton-editar"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="eliminar.php" class="boton-crud boton-eliminar"><i
-                                            class="fa-solid fa-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>Juego 5</td>
-                            <td>$60USD</td>
-                            <td>
-                                <div class="row">
-                                    <a href="editar.php" class="boton-crud boton-editar"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="eliminar.php" class="boton-crud boton-eliminar"><i
-                                            class="fa-solid fa-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6</th>
-                            <td>Juego 6</td>
-                            <td>$40USD</td>
-                            <td>
-                                <div class="row">
-                                    <a href="editar.php" class="boton-crud boton-editar"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="eliminar.php" class="boton-crud boton-eliminar"><i
-                                            class="fa-solid fa-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
+                        <?php endforeach?>
+                    <?php endif?>
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-end">
-                    <a href="agregar.php" class="btn btn-success">Agregar</a>
+                    <a href="controlador-agregar-juego.php" class="btn btn-success">Agregar</a>
                 </div>
             </section>
             <!--FIN DE CATÁLOGO-->
 
+            <?php if($paginas != null): ?>
+            <nav class="d-flex justify-content-center">
+                <ul class="pagination">
+                    <?php if($paginas['anterior']): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?pag=<?php echo $paginas['primera'] ?>" tabindex="-1"> Primera </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?pag=<?php echo $paginas['anterior'] ?>"> <?php echo $paginas['anterior'] ?> </a>
+                    </li>
+                    <?php endif ?>
+                    <li class="page-item active">
+                    <span class="page-link pagina-actual" href="#"><?php echo $paginas['actual'] ?></span>
+                    </li>
+                    <?php if($paginas['siguiente']): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?pag=<?php echo $paginas['siguiente'] ?>"> <?php echo $paginas['siguiente'] ?> </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?pag=<?php echo $paginas['ultima'] ?>"> Última </a>
+                    </li>
+                    <?php endif ?>
+                </ul>
+            </nav>
+            <?php endif ?>
         </div>
     </main>
 
@@ -187,7 +146,10 @@
     <?php require_once('layout/footer.php')?>
 
     <!--SCRIPTS-->
+    
     <?php require_once('layout/js.php')?>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../scripts/administrador.js"></script>
 </body>
 
 </html>

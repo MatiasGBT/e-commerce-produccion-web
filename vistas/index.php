@@ -18,125 +18,81 @@
     <main>
         <!--CARRUSEL-->
         <header>
-            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div id="carruselIndex" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="../imagenes/carrusel/img1.jpg" class="d-block w-100">
-                        <div class="carousel-caption d-block">
-                            <h5 class="carrusel-titulo align-middle">Horizon Forbidden West</h5>
-                            <p class="carrusel-texto d-none d-md-block">Las aventuras de Aloy continúan</p>
+                    <?php if( count($imagenesCarrusel) > 0 ):?>
+
+                        <?php foreach($imagenesCarrusel as $carrusel): ?>
+                            <div class="carousel-item <?php if(array_values($imagenesCarrusel)[0] == $carrusel): echo"active"?><?php endif?>">
+                                <img src="<?php echo $carrusel->imagen?>" class="imagen-carrusel">
+                                <div class="carousel-caption d-block">
+                                    <h5 class="carrusel-titulo align-middle"><?php echo $carrusel->titulo?></h5>
+                                    <p class="carrusel-texto d-none d-md-block"><?php echo $carrusel->texto?></p>
+                                </div>
+                            </div>
+                        <?php endforeach?>
+
+                    <?php else:?>
+                        <div class="carousel-item active">
+                            <a href="controlador_catalogo.php">
+                            <img src="imagenes/carrusel/carrusel_predeterminado.jpg" class="d-block w-100">
+                            </a>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../imagenes/carrusel/img2.jpg" class="d-block w-100">
-                        <div class="carousel-caption d-block">
-                            <h5 class="carrusel-titulo">God of War</h5>
-                            <p class="carrusel-texto d-none d-md-block">Vuelve el Dios de la Guerra</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../imagenes/carrusel/img3.jpg" class="d-block w-100">
-                        <div class="carousel-caption d-block">
-                            <h5 class="carrusel-titulo">Horizon Zero Dawn</h5>
-                            <p class="carrusel-texto d-none d-md-block">Descubre el pasado de Aloy</p>
-                        </div>
-                    </div>
+                    <?php endif?>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                <?php if( count($imagenesCarrusel) > 1 ):?>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carruselIndex"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon align-items-center d-flex justify-content-center" aria-hidden="true">
                         <i class="fa-solid fa-angle-left d-none d-md-block"></i>
                     </span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                <button class="carousel-control-next" type="button" data-bs-target="#carruselIndex"
                     data-bs-slide="next">
                     <span class="carousel-control-next-icon align-items-center d-flex justify-content-center" aria-hidden="true">
                         <i class="fa-solid fa-angle-right d-none d-md-block"></i>
                     </span>
                 </button>
+                <?php endif?>
             </div>
         </header>
         <!--FIN DE CARRUSEL-->
 
         <div class="container">
-            <h2 class="mt-3 text-center text-md-start">CATÁLOGO DE JUEGOS</h2>
+            <h2 class="mt-3 text-center text-md-start">JUEGOS DESTACADOS</h2>
 
             <!--CATALOGO-->
             <div class="row">
-                <div class="col-12 col-md-6 col-lg-4 mb-3">
-                    <div class="card card-height">
-                        <img src="../imagenes/juegos/Juego1.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Horizon Zero Dawn</h5>
-                            <p class="card-text mb-0">Categorías: Acción, Aventura</p>
-                            <p class="card-text">Precio: $40USD</p>
-                            <a href="juego.html" class="btn d-block boton-catalogo">Agregar al carrito</a>
-                        </div>
-                    </div>
-                </div>
+            <?php if( count($juegos) > 0 ):?>
 
+            <?php foreach($juegos as $juego): ?>
                 <div class="col-12 col-md-6 col-lg-4 mb-3">
                     <div class="card card-height">
-                        <img src="../imagenes/juegos/Juego2.jpg" class="card-img-top">
+                        <img src="<?php echo $juego->imagen?>" class="card-img-top">
+                        <img src="<?php echo $juego->logo?>" width="50" heigth="50" class="position-absolute logo-plataforma">
                         <div class="card-body">
-                            <h5 class="card-title">Horizon Forbidden West</h5>
-                            <p class="card-text mb-0">Categorías: Acción, Aventura</p>
-                            <p class="card-text">Precio: $60USD</p>
-                            <a href="juego.html" class="btn d-block boton-catalogo">Agregar al carrito</a>
+                            <h5 class="card-title"><?php echo $juego->nombre_juego?> (<?php echo $juego->nombre_plataforma?>)</h5>
+                            <p class="card-text mb-0">Género: <?php echo $juego->nombre_genero?></p>
+                            <p class="card-text">Precio: $<?php echo number_format($juego->precio, 2, '.', ',') ?>USD</p>
+                            <?php if($juego->stock > 0):?>
+                                <a href="juego.html" class="btn d-block boton-catalogo">Agregar al carrito</a>
+                            <?php else:?>
+                                <a class="btn d-block boton-catalogo-deshabilitado">Sin stock</a>
+                            <?php endif?>
                         </div>
                     </div>
                 </div>
+            <?php endforeach?>
 
-                <div class="col-12 col-md-6 col-lg-4 mb-3">
-                    <div class="card card-height">
-                        <img src="../imagenes/juegos/Juego3.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">God of War</h5>
-                            <p class="card-text mb-0">Categorías: Acción, Hack and Slash</p>
-                            <p class="card-text">Precio: $40USD</p>
-                            <a href="juego.html" class="btn d-block boton-catalogo">Agregar al carrito</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6 col-lg-4 mb-3">
-                    <div class="card card-height">
-                        <img src="../imagenes/juegos/Juego3.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Juego 4</h5>
-                            <p class="card-text mb-0">Categorías: Acción, Hack and Slash</p>
-                            <p class="card-text">Precio: $40USD</p>
-                            <a href="juego.html" class="btn d-block boton-catalogo">Agregar al carrito</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6 col-lg-4 mb-3">
-                    <div class="card card-height">
-                        <img src="../imagenes/juegos/Juego2.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Juego 5</h5>
-                            <p class="card-text mb-0">Categorías: Acción, Aventura</p>
-                            <p class="card-text">Precio: $60USD</p>
-                            <a href="juego.html" class="btn d-block boton-catalogo">Agregar al carrito</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6 col-lg-4 mb-3">
-                    <div class="card card-height">
-                        <img src="../imagenes/juegos/Juego1.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Juego 6</h5>
-                            <p class="card-text mb-0">Categorías: Acción, Aventura</p>
-                            <p class="card-text">Precio: $40USD</p>
-                            <a href="juego.html" class="btn d-block boton-catalogo">Agregar al carrito</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php else:?>
+                <p class="text-center">No hay juegos destacados</p>
+            <?php endif?>
             <!--FIN DE CATALOGO-->
 
+            <div class="d-flex justify-content-center">
+                <a href="controlador-catalogo.php" class="btn d-block boton-catalogo boton-ver-catalogo">Ver catálogo completo</a>
+            </div>
+            
         </div>
     </main>
 
