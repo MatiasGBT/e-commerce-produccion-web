@@ -75,7 +75,7 @@
                             <p class="card-text mb-0">Género: <?php echo $juego->nombre_genero?></p>
                             <p class="card-text">Precio: $<?php echo number_format($juego->precio, 2, '.', ',') ?>USD</p>
                             <?php if($juego->stock > 0):?>
-                                <a href="juego.html" class="btn d-block boton-catalogo">Agregar al carrito</a>
+                                <a href="controlador-agregar-juego-carrito.php?id=<?php echo $juego->id_juego?>&plat=<?php echo $juego->id_plataforma?>" class="btn d-block boton-catalogo">Agregar al carrito</a>
                             <?php else:?>
                                 <a class="btn d-block boton-catalogo-deshabilitado">Sin stock</a>
                             <?php endif?>

@@ -2,11 +2,11 @@
 
 require_once('../conf/conf.php');
 require_once('../modelos/Cnx.php');
-require_once('../modelos/Juego.php');
+require_once('../modelos/Usuario.php');
 require_once('../helpers/helper_input.php');
 require_once('../_autoload.php');
 
-if(!Auth::isAdministrador())
+if(!Auth::isAdministrador() && !Auth::isUsuario())
 {
     header('Location: controlador-login.php');
 }
@@ -21,13 +21,14 @@ try{
 $id = test_input( $_GET['id'] ?? null );
 
 if ($id != null) {
-    $juego = Juego::findById($cnx, $id);
+    $usuario = Usuario::findById($cnx, $id);
 }
 
-if($juego){
-    $juego->delete($cnx);
+if($usuario){
+    $usuario->delete($cnx);
+    Auth::destroy();
 }
 
-header('Location: controlador-administrador.php');
+header('Location: controlador-inicio.php');
 
 unset($cnx);

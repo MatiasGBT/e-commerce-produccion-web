@@ -25,52 +25,36 @@
             <div class="row">
                 <div class="col-12 col-md-8 mb-3">
                     <div class="row">
-
-                        <div class="col-6 col-lg-4 mb-3">
-                            <div class="card carrito-card">
-                                <img src="../imagenes/juegos/HorizonZeroDawn.jpg" class="card-img-top">
-                                <img src="../imagenes/plataformas/logo-play.png" width="35" heigth="35" class="position-absolute logo-plataforma">
-                                <div class="card-body">
-                                    <h5 class="card-title">Horizon Zero Dawn</h5>
-                                    <p class="card-text">Precio: $19.99USD</p>
-                                    <a href="#" class="btn d-block boton-catalogo">Quitar</a>
+                        <?php if($juegos != null && count($juegos) > 0):?>
+                            <?php foreach($juegos as $juego): ?>
+                                <div class="col-6 col-lg-4 mb-3">
+                                    <div class="card carrito-card">
+                                        <img src="<?php echo $juego->imagen?>" class="card-img-top">
+                                        <img src="<?php echo $juego->logo?>" width="35" heigth="35" class="position-absolute logo-plataforma">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?php echo $juego->nombre_juego?></h5>
+                                            <p class="card-text">Precio: $<?php echo number_format($juego->precio, 2, '.', ',')?>USD</p>
+                                            <a href="controlador-quitar-juego-carrito.php?id=<?php echo $juego->id_juego?>&plat=<?php echo $juego->id_plataforma?>" class="btn d-block boton-catalogo">Quitar</a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-lg-4 mb-3">
-                            <div class="card carrito-card">
-                                <img src="../imagenes/juegos/HorizonForbiddenWest.jpg" class="card-img-top">
-                                <img src="../imagenes/plataformas/logo-play.png" width="35" heigth="35" class="position-absolute logo-plataforma">
-                                <div class="card-body">
-                                    <h5 class="card-title">Horizon Forbidden West</h5>
-                                    <p class="card-text">Precio: $69.99USD</p>
-                                    <a href="#" class="btn d-block boton-catalogo">Quitar</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-lg-4 mb-3">
-                            <div class="card carrito-card">
-                                <img src="../imagenes/juegos/GodofWar.jpg" class="card-img-top">
-                                <img src="../imagenes/plataformas/logo-play.png" width="35" heigth="35" class="position-absolute logo-plataforma">
-                                <div class="card-body">
-                                    <h5 class="card-title">God of War</h5>
-                                    <p class="card-text">Precio: $19.99USD</p>
-                                    <a href="#" class="btn d-block boton-catalogo">Quitar</a>
-                                </div>
-                            </div>
-                        </div>
-
+                            <?php endforeach?>
+                        <?php else:?>
+                            <p><?php echo $textoVacio?></p>
+                        <?php endif?>
                     </div>
                 </div>
 
                 <div class="col-12 col-md-4 mb-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Horizon Zero Dawn + 2</h5>
-                            <p class="card-text">Precio total: $109.97USD</p>
-                            <a href="#" class="btn d-block boton-catalogo">Comprar</a>
+                            <h5 class="card-title"><?php echo $nombreCompra?></h5>
+                            <?php if($precioTotal > 0):?>
+                                <p class="card-text">Precio total: $<?php echo number_format($precioTotal, 2, '.', ',')?>USD</p>
+                                <form action="controlador-carrito.php" method="POST">
+                                    <button type="submit" name="submit" class="btn d-block boton-catalogo w-100">Comprar</button>
+                                </form>
+                            <?php endif?>
                         </div>
                     </div>
                 </div>

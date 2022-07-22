@@ -2,11 +2,12 @@
 
 require_once('../conf/conf.php');
 require_once('../modelos/Cnx.php');
-require_once('../modelos/Juego.php');
+require_once('../modelos/Compra.php');
+require_once('../modelos/CompraJuego.php');
 require_once('../helpers/helper_input.php');
 require_once('../_autoload.php');
 
-if(!Auth::isAdministrador())
+if(!Auth::isAdministrador() && !Auth::isUsuario())
 {
     header('Location: controlador-login.php');
 }
@@ -19,15 +20,14 @@ try{
 }
 
 $id = test_input( $_GET['id'] ?? null );
-
+$compra = null;
+$juegos = null;
 if ($id != null) {
-    $juego = Juego::findById($cnx, $id);
+    $compra = Compra::findById($cnx, $id);
+    $juegos = CompraJuego::findByCompraId($cnx, $id);
 }
 
-if($juego){
-    $juego->delete($cnx);
-}
 
-header('Location: controlador-administrador.php');
+require_once('../vistas/detalle-compra.php');
 
 unset($cnx);

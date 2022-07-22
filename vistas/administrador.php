@@ -72,7 +72,7 @@
                     <thead>
                         <tr>
                             <th scope="col" class="d-none d-md-table-cell">#</th>
-                            <th scope="col">Compra</th>
+                            <th scope="col">Nombre</th>
                             <th scope="col" class="d-none d-md-table-cell">Precio</th>
                             <th scope="col">Editar</th>
                         </tr>
@@ -139,6 +139,61 @@
                 </ul>
             </nav>
             <?php endif ?>
+
+            <!--USUARIOS-->
+            <section class="mt-3">
+                <h2>GESTIONAR USUARIOS</h2>
+                <p>Busca un usuario para gestionarlo</p>
+                <form class="d-flex mb-3 col-12 col-lg-6" method="POST" action="controlador-administrador.php">
+                    <input class="d-block input_form me-2 w-100" type="search" placeholder="Buscar por nombre" name="username" id="username" required>
+                    <button class="btn d-block boton-catalogo" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <?php if( $usuario ):?>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="d-none d-md-table-cell">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Gestionar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row" class="py-0 d-none d-md-table-cell"><?php echo $usuario->id_usuario?></td>
+                            <td class="py-0"><?php echo $usuario->nombre?></td>
+                            <td class="py-0"><?php echo $usuario->email?></td>
+                            <td class="p-0">
+                                <div class="row m-0">
+                                    <?php if($usuario->id_rol == 2):?>
+                                        <a href="#" class="boton-crud boton-destacar col-6" onclick="hacerAdmin('controlador-hacer-admin.php?id=<?php echo $usuario->id_usuario?>')">
+                                            <i class="fa-solid fa-user-tie"></i>
+                                        </a>
+                                    <?php else:?>
+                                        <a href="#" class="boton-crud boton-quitar-destacado col-6" onclick="quitarAdmin('controlador-quitar-admin.php?id=<?php echo $usuario->id_usuario?>')">
+                                            <i class="fa-solid fa-user"></i>
+                                        </a>
+                                    <?php endif?>
+                                    <?php if($usuario->fecha_baja != null):?>
+                                        <a href="#" onclick="restaurarUsuario('controlador-restaurar-usuario.php?id=<?php echo $usuario->id_usuario?>')" class="boton-crud boton-restaurar col-6">
+                                            <i class="fa-solid fa-reply"></i>
+                                        </a>
+                                    <?php else:?>
+                                        <a href="#" class="boton-crud boton-eliminar col-6" onclick="eliminarUsuario('controlador-eliminar-usuario.php?id=<?php echo $usuario->id_usuario?>')">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    <?php endif?>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <?php endif?>
+                <?php if($errorUsuario != null):?>
+                    <p><?php echo $errorUsuario?></p>
+                <?php endif?>
+            </section>
+            <!--FIN DE USUARIOS-->
         </div>
     </main>
 

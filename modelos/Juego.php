@@ -286,4 +286,22 @@ class Juego extends ModeloPadre{
         $consulta->execute();
         return $consulta->fetch();
     }
+
+    public static function findByIdCarrito(Cnx $cnx, int $id_juego, $id_plataforma)
+    {
+        $consulta = $cnx->prepare('
+            SELECT j.*, jp.*, p.*
+            FROM juegos j
+            INNER JOIN juegos_plataformas jp
+            ON j.id_juego = jp.id_juego
+            INNER JOIN plataformas p
+            ON jp.id_plataforma = p.id_plataforma
+            WHERE j.id_juego = :id_juego
+            AND jp.id_plataforma = :id_plataforma
+        ');
+        $consulta->bindValue(':id_juego', $id_juego);
+        $consulta->bindValue(':id_plataforma', $id_plataforma);
+        $consulta->execute();
+        return $consulta->fetch();
+    }
 }

@@ -1,3 +1,7 @@
+<?php
+    require_once('../_autoload.php');
+?>
+
 <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="controlador-inicio.php">
@@ -16,18 +20,34 @@
                     <li class="nav-item">
                         <a class="nav-link nav-catalogo" href="controlador-catalogo.php"><i class="fa-solid fa-gamepad"></i> Catálogo</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-carrito" href="controlador-carrito.php"><i class="fa-solid fa-shopping-cart"></i> Carrito</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-cuenta" href="controlador-cuenta.php"><i class="fa-solid fa-user"></i> Cuenta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-administrar" href="controlador-administrador.php"><i class="fa-solid fa-screwdriver-wrench"></i> Administrar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-logout" href="login.php"><i class="fa-solid fa-user-xmark"></i> Logout</a>
-                    </li>
+                    <?php if(!Auth::isAdministrador()): ?>
+                        <li class="nav-item">
+                            <a class="nav-link nav-carrito" href="controlador-carrito.php"><i class="fa-solid fa-shopping-cart"></i> Carrito</a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if(!Auth::isAdministrador() && !Auth::isUsuario()): ?>
+                        <li class="nav-item">
+                            <a class="nav-link nav-cuenta" href="controlador-login.php"><i class="fa-solid fa-user"></i> Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-cuenta" href="controlador-registro.php"><i class="fa-solid fa-user-plus"></i> Registrarse</a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if(Auth::isAdministrador() || Auth::isUsuario()): ?>
+                        <li class="nav-item">
+                            <a class="nav-link nav-cuenta" href="controlador-cuenta.php"><i class="fa-solid fa-user"></i> Cuenta</a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if(Auth::isAdministrador()): ?>
+                        <li class="nav-item">
+                            <a class="nav-link nav-administrar" href="controlador-administrador.php"><i class="fa-solid fa-screwdriver-wrench"></i> Administrar</a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if(Auth::isAdministrador() || Auth::isUsuario()): ?>
+                        <li class="nav-item">
+                            <a class="nav-link nav-logout" href="controlador-logout.php"><i class="fa-solid fa-user-xmark"></i> Logout</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

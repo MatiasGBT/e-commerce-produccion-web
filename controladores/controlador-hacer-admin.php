@@ -2,7 +2,7 @@
 
 require_once('../conf/conf.php');
 require_once('../modelos/Cnx.php');
-require_once('../modelos/Juego.php');
+require_once('../modelos/Usuario.php');
 require_once('../helpers/helper_input.php');
 require_once('../_autoload.php');
 
@@ -20,12 +20,10 @@ try{
 
 $id = test_input( $_GET['id'] ?? null );
 
-if ($id != null) {
-    $juego = Juego::findById($cnx, $id);
-}
+$usuario = Usuario::findById($cnx, $id);
 
-if($juego){
-    $juego->delete($cnx);
+if($usuario){
+    $usuario->hacerAdmin($cnx);
 }
 
 header('Location: controlador-administrador.php');

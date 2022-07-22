@@ -18,12 +18,6 @@
     <main>
         <div class="container">
             <header>
-                <ul>
-                    <?php foreach($errores as $error): ?>
-                        <li class="text text-danger"> <?php echo $error ?> </li>
-                    <?php endforeach ?>
-                </ul>
-
                 <?php if($juego->nombre_juego == null):?>
                     <h1 class="mt-3 text-center text-md-start">AGREGAR VIDEOJUEGO</h1>
                 <?php else:?>
@@ -32,16 +26,21 @@
             </header>
 
             <section>
+                <ul>
+                    <?php foreach($errores as $error): ?>
+                        <li class="text text-danger"> <?php echo $error ?> </li>
+                    <?php endforeach ?>
+                </ul>
                 <form method="POST" enctype="multipart/form-data" action="<?php echo $action?>">
                     <input type="hidden" name="id" value="<?php echo $juego->id_juego?>">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="d-block input_form" id="nombre" name="nombre"
+                        <input type="text" class="d-block input_form" id="nombre" name="nombre" required
                             placeholder="Ingresa el nombre del juego" value="<?php if($juego != null): echo $juego->nombre_juego?><?php endif?>">
                     </div>
                     <div class="mb-3">
-                        <label for="precio" class="form-label">Precio</label>
-                        <input type="number" class="d-block input_form" id="precio" name="precio" step="0.01"
+                        <label for="precio" class="form-label">Precio (USD)</label>
+                        <input type="number" class="d-block input_form" id="precio" name="precio" step="0.01" required
                             placeholder="Ingresa el precio del juego" value="<?php if($juego != null): echo $juego->precio?><?php endif?>">
                     </div>
                     <div class="mb-3">
@@ -64,7 +63,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="fecha" class="form-label">Fecha de lanzamiento</label>
-                        <input type="date" class="d-block input_form" id="fecha" name="fecha"
+                        <input type="date" class="d-block input_form" id="fecha" name="fecha" required
                             placeholder="Ingresa la fecha de lanzamiento del juego" value="<?php if($juego->fecha_lanzamiento != null): echo $juego->fecha_lanzamiento?><?php endif?>">
                     </div>
                     <div class="mb-3">

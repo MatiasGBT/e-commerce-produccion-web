@@ -34,3 +34,28 @@ input {
     transition: .3s;
     color: rgb(223, 223, 223);
 }
+
+.boton {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+}
+
+.boton:hover {
+    color: white;
+}
+
+.boton-ver {
+    background: rgb(0, 132, 255);
+}
+
+.boton-ver:hover {
+    background: rgb(40, 151, 255);
+}
+
+.active {
+    background: red !important;
+    border: red;
+}

@@ -48,6 +48,14 @@
     background: rgb(255, 72, 72);
 }
 
+.boton-restaurar {
+    background: #198754;
+}
+
+.boton-restaurar:hover {
+    background: #16794b;
+}
+
 td {
     line-height: 26px;
 }

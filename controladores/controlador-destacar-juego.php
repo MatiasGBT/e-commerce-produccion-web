@@ -4,6 +4,12 @@ require_once('../conf/conf.php');
 require_once('../modelos/Cnx.php');
 require_once('../modelos/Juego.php');
 require_once('../helpers/helper_input.php');
+require_once('../_autoload.php');
+
+if(!Auth::isAdministrador())
+{
+    header('Location: controlador-login.php');
+}
 
 try{
     $cnx = new Cnx();

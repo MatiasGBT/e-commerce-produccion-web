@@ -10,7 +10,7 @@ class JuegoPlataforma extends ModeloPadre{
         parent::__construct(array(
             'id_juegos_plataformas' => null,
             'id_juego' => null,
-            'id_categoria' => null,
+            'id_plataforma' => null,
             'stock' => null
         ));
     }
@@ -72,5 +72,36 @@ class JuegoPlataforma extends ModeloPadre{
         $consulta->bindValue(':id_juego', $idJuego);
         $consulta->bindValue(':id_plataforma', $idPlataforma);
         $consulta->execute();
+    }
+
+    public static function findByTwoIds(Cnx $cnx, $id_juego, $id_plataforma)
+    {
+        $consulta = $cnx->prepare('
+            SELECT *
+            FROM juegos_plataformas
+            WHERE id_juego = :id_juego
+            AND id_plataforma = :id_plataforma
+        ');
+        $consulta->bindValue(':id_juego', $id_juego);
+        $consulta->bindValue(':id_plataforma', $id_plataforma);
+        $consulta->execute();
+        $consulta->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'JuegoPlataforma');
+        return $consulta->fetch();
+    }
+
+    public function restarStock(Cnx $cnx)
+    {
+        $consulta = $cnx->prepare('
+            UPDATE juegos_plataformas SET 
+            stock = :stock
+            WHERE id_juego = :id_juego
+            AND id_plataforma = :id_plataforma
+        ');
+        $consulta->bindValue(':stock', $this->stock);
+        $consulta->bindValue(':id_juego', $this->id_juego);
+        $consulta->bindValue(':id_plataforma', $this->id_plataforma);
+        $consulta->execute();
+        $consulta->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'JuegoPlataforma');
+        return $consulta->fetch();
     }
 }

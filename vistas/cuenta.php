@@ -1,3 +1,7 @@
+<?php
+    require_once('../_autoload.php');
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,83 +28,106 @@
               <!--CREDENCIALES-->
               <section>
                   <h2>ACTUALIZAR CREDENCIALES</h2>
-                  <form>
+                  <button type="button" id="btn-quiero-cambiar" onclick="cambiarCredenciales()" class="btn boton-credenciales mb-3">Quiero cambiar mis credenciales</button>
+                  <?php if(count($errores) > 0): ?>
+                    <ul>
+                      <?php foreach($errores as $error): ?>
+                          <li class="text text-danger"> <?php echo $error ?> </li>
+                      <?php endforeach ?>
+                    </ul>
+                  <?php endif; ?>
+                  <form action="controlador-cuenta.php" method="POST">
                       <div class="mb-3">
                           <label for="nombre" class="form-label">Nombre de usuario</label>
-                          <input type="text" class="d-block input_form" id="nombre" value="PepeArgento" placeholder="Nuevo nombre de usuario">
+                          <input type="text" class="d-block input_form" id="nombre" name="nombre" disabled
+                            value="<?php echo $nombre?>" placeholder="Nuevo nombre de usuario">
                         </div>
                       <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="d-block input_form" id="email" value="pepearg@mail.com" placeholder="Nuevo email">
+                        <input type="email" class="d-block input_form" id="email" name="email" disabled
+                          value="<?php echo $email?>" placeholder="Nuevo email">
                       </div>
                       <div class="mb-3">
                         <label for="clave" class="form-label">Contraseña</label>
-                        <input type="password" class="d-block input_form" id="clave" value="pepe123" placeholder="Nueva contraseña">
+                        <input type="password" class="d-block input_form" id="clave" name="clave" disabled
+                          placeholder="Nueva contraseña">
+                        <p>Deja vacío este campo si no deseas cambiar la contraseña actual</p>
                       </div>
-                      <button type="submit" class="btn boton-credenciales">Cambiar credenciales</button>
+                      <button type="submit" id="btn-submit" name="submit" class="btn boton-credenciales" disabled>Cambiar credenciales</button>
                     </form>
               </section>
               <!--FIN DE CREDENCIALES-->
 
               <!--HISTORIAL-->
-              <section class="mt-3">
-                  <h2>HISTORIAL DE COMPRAS</h2>
-                  <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Compra</th>
-                          <th scope="col">Fecha</th>
-                          <th scope="col">Precio</th>
-                          <th scope="col">Plataforma/s</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Gears 5</td>
-                          <td>15/05/2021</td>
-                          <td>$39.99USD</td>
-                          <td>Xbox</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Marvel Spider-Man Miles Morales + 3</td>
-                          <td>24/12/2021</td>
-                          <td>$200USD</td>
-                          <td>PlayStation + 2</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Horizon Forbidden West</td>
-                          <td>03/03/2022</td>
-                          <td>$69.99USD</td>
-                          <td>PlayStation</td>
-                        </tr>
-                      </tbody>
-                    </table>
-              </section>
+              <?php if(!Auth::isAdministrador()): ?>
+                <section class="mt-3">
+                    <h2>HISTORIAL DE COMPRAS</h2>
+                    <?php if(count($compras) > 0): ?>
+                      <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col">Compra</th>
+                              <th scope="col">Fecha</th>
+                              <th class="py-0 d-none d-md-table-cell" scope="col">Total</th>
+                              <th scope="col">Detalles</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <?php foreach($compras as $compra): ?>
+                                <tr>
+                                  <td class="py-0"><?php echo $compra->nombre_compra?></td>
+                                  <td class="py-0"><?php echo $compra->fecha_compra?></td>
+                                  <td class="py-0 d-none d-md-table-cell">$<?php echo number_format($compra->total, 2, '.', ',') ?>USD</td>
+                                  <td class="p-0">
+                                    <a href="controlador-ver-compra.php?id=<?php echo $compra->id_compra?>" class="boton boton-ver">
+                                      <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                  </td>
+                                </tr>
+                              <?php endforeach?>
+                          </tbody>
+                        </table>
+                      <?php else:?>
+                        <p>No has realizado ninguna compra</p>
+                      <?php endif;?>
+                </section>
+              <?php endif;?>
               <!--FIN DE HISTORIAL-->
 
-              <nav class="d-flex justify-content-center">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="" tabindex="-1"> Primera </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="">1</a>
-                    </li>
-                    <li class="page-item active">
-                    <span class="page-link pagina-actual" href="#">2</span>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href=""> Última </a>
-                    </li>
-                </ul>
-              </nav>
+              <?php if($paginas != null and count($compras) > 0): ?>
+                <nav class="d-flex justify-content-center">
+                  <ul class="pagination">
+                      <?php if($paginas['anterior']): ?>
+                      <li class="page-item">
+                          <a class="page-link" href="?pag=<?php echo $paginas['primera'] ?>" tabindex="-1"> Primera </a>
+                      </li>
+                      <li class="page-item">
+                          <a class="page-link" href="?pag=<?php echo $paginas['anterior'] ?>"> <?php echo $paginas['anterior'] ?> </a>
+                      </li>
+                      <?php endif ?>
+                      <li class="page-item active">
+                      <span class="page-link pagina-actual" href="#"><?php echo $paginas['actual'] ?></span>
+                      </li>
+                      <?php if($paginas['siguiente']): ?>
+                      <li class="page-item">
+                          <a class="page-link" href="?pag=<?php echo $paginas['siguiente'] ?>"> <?php echo $paginas['siguiente'] ?> </a>
+                      </li>
+                      <li class="page-item">
+                          <a class="page-link" href="?pag=<?php echo $paginas['ultima'] ?>"> Última </a>
+                      </li>
+                      <?php endif ?>
+                  </ul>
+                </nav>
+              <?php endif;?>
+
+              <!--DANGER ZONE-->
+              <div class="alert alert-danger <?php if(Auth::isAdministrador()): echo "mt-3"?><?php endif;?>">
+                <h2>Zona peligrosa</h2>
+                <button type="button" class="btn boton-credenciales" onclick="eliminarCuenta('controlador-eliminar-cuenta.php?id=<?php echo $id?>')">
+                  Eliminar cuenta
+                </button>
+            </div>
+            <!--FIN DE DANGER ZONE-->
         </div>
     </main>
 
@@ -109,6 +136,8 @@
 
     <!--SCRIPTS-->
     <?php require_once('layout/js.php')?>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../scripts/cuenta.js"></script>
 </body>
 
 </html>

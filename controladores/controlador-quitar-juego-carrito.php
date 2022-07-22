@@ -6,11 +6,6 @@ require_once('../modelos/Juego.php');
 require_once('../helpers/helper_input.php');
 require_once('../_autoload.php');
 
-if(!Auth::isAdministrador())
-{
-    header('Location: controlador-login.php');
-}
-
 try{
     $cnx = new Cnx();
 }catch(PDOException $e){
@@ -18,16 +13,17 @@ try{
     exit;
 }
 
-$id = test_input( $_GET['id'] ?? null );
+$id_juego = test_input( $_GET['id'] ?? null );
+$id_plataforma = test_input( $_GET['plat'] ?? null );
 
-if ($id != null) {
-    $juego = Juego::findById($cnx, $id);
+if ($id_juego != null && $id_plataforma != null) {
+    $juego = (object)Juego::findByIdCarrito($cnx, $id_juego, $id_plataforma);
 }
 
 if($juego){
-    $juego->delete($cnx);
+    Auth::quitGame($juego);
 }
 
-header('Location: controlador-administrador.php');
+header('Location: controlador-carrito.php');
 
 unset($cnx);

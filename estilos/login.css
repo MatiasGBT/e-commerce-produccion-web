@@ -16,8 +16,9 @@
 
 .box {
     background: white;
-    padding: 50px;
+    padding: 30px;
     border-radius: 25px;
+    min-width: 450px;
 }
 
 .box button {

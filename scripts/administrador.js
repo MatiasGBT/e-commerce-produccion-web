@@ -63,3 +63,71 @@ function eliminarJuego(p_url_eliminar) {
     }
   });
 }
+
+function hacerAdmin(p_url_eliminar) {
+  Swal.fire({
+    title: '¿Seguro/a que desea convertir a este usuario en administrador?',
+    text: 'Podrás revertir esta acción',
+    icon: 'warning',
+    showCancelButton: true,
+    cancelButtonColor: '#d1052a',
+    confirmButtonColor: '#00aae4',
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Convertir'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      location.href = p_url_eliminar;
+    }
+  });
+}
+
+function quitarAdmin(p_url_eliminar) {
+  Swal.fire({
+    title: '¿Seguro/a que desea quitarle los permisos de administrador a este usuario?',
+    text: 'Podrás revertir esta acción',
+    icon: 'warning',
+    showCancelButton: true,
+    cancelButtonColor: '#d1052a',
+    confirmButtonColor: '#00aae4',
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Quitar permisos'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      location.href = p_url_eliminar;
+    }
+  });
+}
+
+function restaurarUsuario(p_url_eliminar) {
+  Swal.fire({
+    title: '¿Seguro/a que desea restaurar a este usuario?',
+    text: 'Podrás revertir esta acción',
+    icon: 'question',
+    showCancelButton: true,
+    cancelButtonColor: '#d1052a',
+    confirmButtonColor: '#00aae4',
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Restaurar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      location.href = p_url_eliminar;
+    }
+  });
+}
+
+function eliminarUsuario(p_url_eliminar) {
+  Swal.fire({
+    title: '¿Seguro/a que desea eliminar a este usuario?',
+    text: 'Podrás revertir esta acción',
+    icon: 'warning',
+    showCancelButton: true,
+    cancelButtonColor: '#d1052a',
+    confirmButtonColor: '#00aae4',
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Eliminar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      location.href = p_url_eliminar;
+    }
+  });
+}
